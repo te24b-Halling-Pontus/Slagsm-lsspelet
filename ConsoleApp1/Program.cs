@@ -2,27 +2,27 @@
 using System.Security.Cryptography;
 static void Namn()
 {
-    int p1Score = 0;
-    int p2Score = 0;
-    string p1;
-    string p2;
-    int totalDmgP1 = 0;
-    int totalDmgP2 = 0;
+    int player1Score = 0;
+    int player2Score = 0;
+    string player1Name;
+    string player2Name;
+    int totalDamagePlayer1 = 0;
+    int totalDamagePlayer2 = 0;
 
     Console.WriteLine("Vad vill ni hetta");
     Console.WriteLine("spelare ett:");
-    p1 = Console.ReadLine();
+    player1Name = Console.ReadLine();
     Console.WriteLine("spelare två:");
-    p2 = Console.ReadLine();
+    player2Name = Console.ReadLine();
 
-    if (p1 == p2)
+    if (player1Name == player2Name)
     {
         Console.WriteLine("spelare ett får inte hetta samma som spelare två");
         Namn();
     }
     else
     {
-        start(p1, p2, p1Score, p2Score, totalDmgP1, totalDmgP2);
+        Start(player1Name, player2Name, player1Score, player2Score, totalDamagePlayer1, totalDamagePlayer2);
     }
 }
 
@@ -30,63 +30,63 @@ Console.WriteLine("välkomen till mitt slå spel");
 Namn();
 
 
-static void start(string p1, string p2, int p1Score, int p2Score, int totalDmgP1, int totalDmgP2)
+static void Start(string player1Name, string player2Name, int player1Score, int player2Score, int totalDamagePlayer1, int totalDamagePlayer2)
 {
-    int p1hp = 100;
-    int p2hp = 100;
+    int player1HP = 100;
+    int player2HP = 100;
     int roundCounter = 1;
-    int dmgOnP2;
-    int dmgOnP1;
+    int damageOnP2;
+    int damageOnP1;
 
-    Console.WriteLine($"Den store starka {p1} möter den coola snabba {p2}");
-    while (p1hp > 0 && p2hp > 0)
+    Console.WriteLine($"Den store starka {player1Name} möter den coola snabba {player2Name}");
+    while (player1HP > 0 && player2HP > 0)
     {
 
         Console.WriteLine($"\nRunda {roundCounter}");
-        dmgOnP2 = damage();
-        dmgOnP1 = damage();
-        totalDmgP1 += dmgOnP2;
-        totalDmgP2 += dmgOnP1;
+        damageOnP2 = Damage();
+        damageOnP1 = Damage();
+        totalDamagePlayer1 += damageOnP2;
+        totalDamagePlayer2 += damageOnP1;
 
-        if (dmgOnP2 > p2hp && dmgOnP1 > p1hp)
+        if (damageOnP2 > player2HP && damageOnP1 > player1HP)
         {
-            Console.WriteLine($"{p1} och {p2} slog varandra satidigt så hårt att båda dog!");
-            p2hp -= dmgOnP2;
-            p1hp -= dmgOnP1;
+             Console.WriteLine($"{player1Name} och {player2Name} slog varandra satidigt så hårt att båda dog!");
+            player2HP -= damageOnP2;
+            player1HP -= damageOnP1;
         }
-        else if (dmgOnP2 > p2hp)
+        else if (damageOnP2 > player2HP)
         {
-            dmgOnP2 = p2hp;
-            p2hp -= dmgOnP2;
-            p1Score++;
-            Console.WriteLine($"\n{p1} slog på {p2} och gjorde {dmgOnP2} i skada och i ju med det döda {p2} och van!!");
+            damageOnP2 = player2HP;
+            player2HP -= damageOnP2;
+            player1Score++;
+            Console.WriteLine($"\n{player1Name} slog på {player2Name} och gjorde {damageOnP2} i skada och i ju med det döda {player2Name} och van!!");
         }
-        else if (dmgOnP1 > p1hp)
+        else if (damageOnP1 > player1HP)
         {
-            dmgOnP1 = p1hp;
-            p1hp -= dmgOnP1;
-            p2Score++;
-            Console.WriteLine($"\n{p2} slog på {p1} och gjorde {dmgOnP1} i skada och i ju med det döda {p1} och van!!");
+            damageOnP1 = player1HP;
+            player1HP -= damageOnP1;
+            player2Score++;
+            Console.WriteLine($"\n{player2Name} slog på {player1Name} och gjorde {damageOnP1} i skada och i ju med det döda {player1Name} och van!!");
         }
         else
         {
-            p2hp -= dmgOnP2;
-            Console.WriteLine($"\n{p1} slog på {p2} och gjorde {dmgOnP2} i skada, nu har {p2} {p2hp}HP kvar");
-            p1hp -= dmgOnP1;
-            Console.WriteLine($"\n{p2} slog på {p1} och gjorde {dmgOnP1} i skada, nu har {p1} {p1hp}HP kvar");
+            player2HP -= damageOnP2;
+            Console.WriteLine($"\n{player1Name} slog på {player2Name} och gjorde {damageOnP2} i skada, nu har {player2Name} {player2HP}HP kvar");
+            player1HP -= damageOnP1;
+            Console.WriteLine($"\n{player2Name} slog på {player1Name} och gjorde {damageOnP1} i skada, nu har {player1Name} {player1HP}HP kvar");
         }
         roundCounter++;
         Console.ReadLine();
 
     }
-    restarter(p1, p2, p1Score, p2Score, totalDmgP1, totalDmgP2);
+    Restarter(player1Name, player2Name, player1Score, player2Score, totalDamagePlayer1, totalDamagePlayer2);
 }
 
-static void restarter(string p1, string p2, int p1Score, int p2Score, int totalDmgP1, int totalDmgP2)
+static void Restarter(string player1Name, string player2Name, int player1Score, int player2Score, int totalDamagePlayer1, int totalDamagePlayer2)
 {
     Console.WriteLine("tack för att ni körda mitt lila spel hoppas ni har haft det kul, vil ni köra igen?");
     Console.WriteLine("skriv nej för att avlusta eller skriv omstart för att börja om helt, (din poäng försviner) eller poäng för att se poäng");
-    Console.WriteLine("skriv något annat för att starta om med samma namn");
+    Console.WriteLine("tryck enter för att starta om med samma namn");
     string restart = Console.ReadLine();
     if (restart == "omstart")
     {
@@ -94,25 +94,34 @@ static void restarter(string p1, string p2, int p1Score, int p2Score, int totalD
     }
     if (restart == "poäng")
     {
-        scoreCounter(p1, p2, p1Score, p2Score, totalDmgP1, totalDmgP2);
+        ScoreCounter(player1Name, player2Name, player1Score, player2Score, totalDamagePlayer1, totalDamagePlayer2);
     }
-    else if (restart != "nej")
+    else if (restart == "")
     {
-        start(p1, p2, p1Score, p2Score, totalDmgP1, totalDmgP2);
+        Start(player1Name, player2Name, player1Score, player2Score, totalDamagePlayer1, totalDamagePlayer2);
     }
+    else if (restart == "nej")
+    {
+    }
+    else
+    {
+        Console.WriteLine("Du måste välja poäng, omstart, nej eller tyrcka enter");
+        Restarter(player1Name, player2Name, player1Score, player2Score, totalDamagePlayer1, totalDamagePlayer2);
+    }
+    
 }
 
-static int damage()
+static int Damage()
 {
-    int dmg = Random.Shared.Next(21);
-    return dmg;
+    int damage = Random.Shared.Next(21);
+    return damage;
 }
 
-static void scoreCounter(string p1, string p2, int p1Score, int p2Score, int totalDmgP1, int totalDmgP2)
+static void ScoreCounter(string player1Name, string player2Name, int player1Score, int player2Score, int totalDamagePlayer1, int totalDamagePlayer2)
 {
     Console.WriteLine($"\nSpelare\tvinster\tdamage");
-    Console.WriteLine($"{p1}\t{p1Score}\t{totalDmgP1}");
-    Console.WriteLine($"{p2}\t{p2Score}\t{totalDmgP2}");
+    Console.WriteLine($"{player1Name}\t{player1Score}\t{totalDamagePlayer1}");
+    Console.WriteLine($"{player2Name}\t{player2Score}\t{totalDamagePlayer2}");
     Console.ReadLine();
-    restarter(p1, p2, p1Score, p2Score, totalDmgP1, totalDmgP2);
+    Restarter(player1Name, player2Name, player1Score, player2Score, totalDamagePlayer1, totalDamagePlayer2);
 }
