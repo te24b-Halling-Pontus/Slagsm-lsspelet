@@ -35,45 +35,45 @@ static void Start(string player1Name, string player2Name, int player1Score, int 
     int player1HP = 100;
     int player2HP = 100;
     int roundCounter = 1;
-    int damageOnP2;
-    int damageOnP1;
+    int damageOnPlayer2;
+    int damageOnPlayer1;
 
     Console.WriteLine($"Den store starka {player1Name} möter den coola snabba {player2Name}");
     while (player1HP > 0 && player2HP > 0)
     {
 
         Console.WriteLine($"\nRunda {roundCounter}");
-        damageOnP2 = Damage();
-        damageOnP1 = Damage();
-        totalDamagePlayer1 += damageOnP2;
-        totalDamagePlayer2 += damageOnP1;
+        damageOnPlayer2 = Damage();
+        damageOnPlayer1 = Damage();
+        totalDamagePlayer1 += damageOnPlayer2;
+        totalDamagePlayer2 += damageOnPlayer1;
 
-        if (damageOnP2 > player2HP && damageOnP1 > player1HP)
+        if (damageOnPlayer2 > player2HP && damageOnPlayer1 > player1HP)
         {
              Console.WriteLine($"{player1Name} och {player2Name} slog varandra satidigt så hårt att båda dog!");
-            player2HP -= damageOnP2;
-            player1HP -= damageOnP1;
+            player2HP -= damageOnPlayer2;
+            player1HP -= damageOnPlayer1;
         }
-        else if (damageOnP2 > player2HP)
+        else if (damageOnPlayer2 > player2HP)
         {
-            damageOnP2 = player2HP;
-            player2HP -= damageOnP2;
+            damageOnPlayer2 = player2HP;
+            player2HP -= damageOnPlayer2;
             player1Score++;
-            Console.WriteLine($"\n{player1Name} slog på {player2Name} och gjorde {damageOnP2} i skada och i ju med det döda {player2Name} och van!!");
+            Console.WriteLine($"\n{player1Name} slog på {player2Name} och gjorde {damageOnPlayer2} i skada och i ju med det döda {player2Name} och van!!");
         }
-        else if (damageOnP1 > player1HP)
+        else if (damageOnPlayer1 > player1HP)
         {
-            damageOnP1 = player1HP;
-            player1HP -= damageOnP1;
+            damageOnPlayer1 = player1HP;
+            player1HP -= damageOnPlayer1;
             player2Score++;
-            Console.WriteLine($"\n{player2Name} slog på {player1Name} och gjorde {damageOnP1} i skada och i ju med det döda {player1Name} och van!!");
+            Console.WriteLine($"\n{player2Name} slog på {player1Name} och gjorde {damageOnPlayer1} i skada och i ju med det döda {player1Name} och van!!");
         }
         else
         {
-            player2HP -= damageOnP2;
-            Console.WriteLine($"\n{player1Name} slog på {player2Name} och gjorde {damageOnP2} i skada, nu har {player2Name} {player2HP}HP kvar");
-            player1HP -= damageOnP1;
-            Console.WriteLine($"\n{player2Name} slog på {player1Name} och gjorde {damageOnP1} i skada, nu har {player1Name} {player1HP}HP kvar");
+            player2HP -= damageOnPlayer2;
+            Console.WriteLine($"\n{player1Name} slog på {player2Name} och gjorde {damageOnPlayer2} i skada, nu har {player2Name} {player2HP}HP kvar");
+            player1HP -= damageOnPlayer1;
+            Console.WriteLine($"\n{player2Name} slog på {player1Name} och gjorde {damageOnPlayer1} i skada, nu har {player1Name} {player1HP}HP kvar");
         }
         roundCounter++;
         Console.ReadLine();
